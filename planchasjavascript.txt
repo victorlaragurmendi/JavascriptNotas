@@ -1,0 +1,398 @@
+//JAVASCRIPT ES ASINCRONO POR QUE TODO OCURRE ACONTINUACION DE OTRO
+
+//NOTACION DE OBJETOS JAVASCRIPT
+para acceder a los objetos en js se usa la notacion de punto 
+se separan por comas
+		var nombre{
+		  persona:"juana",
+		  apellido:"herrera",
+		  edad:25
+		};
+
+//PASO POR VALOR Y REFERENCIA
+paso por valor ocurre siempre en las variables primitivas 
+ambos tienen un espacio de memoria diferentes a y b si le cambio
+el valor a a e imprimo los dos denuevo b se queda con el valor anterior
+	var a=10;
+	var b=a;
+	console.log("a: ",a);
+	console.log("b: ",b);
+	a =20;
+	console.log("a:",a);
+	console.log("b:",b);
+paso por referencia los objetos siempre se pasan por referencia
+al intercambiar el valor de c.nombre e imprimir se cambia tambien el valorde d
+ya que pertenecen al mismo espacio de memoria
+	var c={
+	nombre:"juana"
+	}
+	var d=c;
+	console.log("c: ",c);
+	console.log("d: ",d);
+					salida
+					c:{nombre:juana}
+					d:{nombre:juana}
+	c.nombre="Maria";
+	console.log("c: ",c);
+	console.log("d: ",d);
+					salida
+					c:{nombre:Maria}
+					d:{nombre:Maria}
+
+
+//ACCEDER A DATOS ATRAVEZ DE PUNTOS
+se crea una variable edificiovar que apunta al subobjeto edificio y le podemos agregar propiedades como nopiso se hace uso del paso por referencia
+				var persona ={
+				    nombre :"Juana",  
+				    apellido: "Herrera",
+				    edad :25,
+				    direcion:{
+					pais :"costa Rica",
+					ciudad:"San jose ",
+				    edificio:{
+				    nombre:"sheraton",
+				    telefono:2222-3633,
+				    } 
+				    }
+				};
+				var edificiovar=persona.direcion.edificio;
+				edificiovar.nopiso="8vo piso";
+				console.log(edificiovar);
+
+						salida
+						{nombre: "sheraton", telefono: -1411, nopiso: "8vo piso"}
+
+//FUNCIONES
+		function nombreFuncion(){
+		definicion de la funcion
+		}
+                nombreFuncion();  para el llamado de una funcion
+									function miFuncion(){
+										var nombre="pedro";
+										console.log(nombre);
+									    }
+									    miFuncion();
+												salida
+												pedro
+var nombre="Pepe Guerra";
+    function miFuncion(){
+        var nombre="Pedro el Escamoso";
+        console.log(nombre);
+    }
+    miFuncion();
+salida
+Pedro el Escamoso
+no se impime Pepe, por que al momento de 
+llamar a la funcion se crea un nuevo contexto
+				var nombre="Pepe Guerra";
+				    function miFuncion(){
+					console.log(nombre);
+				    }
+				    miFuncion();
+						salida
+						Pepe Guerra
+						en este caso como no encuentra dentro del
+						contexto la variable nombre busca afuera 
+						de la funcion en el entorno global 
+						e imprime Pepe Guerra
+function miFuncion(){
+        console.log(nombre);
+    }
+    miFuncion();
+    var nombre="Pepe Guerra";
+salida
+undfined
+javascript barre todo el codigo y encuentra la varible nombre 
+pero como esta despues de el llamdo de la funcion pone undefined
+en caso no exista la varible nombre ya saldria error
+					function miFuncion(){       
+					    }
+					las funciones siempre retornan algun valor
+					en este caso si ejecuto miFuncion() en la
+					consola retorna undefined, es mas al momento
+					de crearse una funcion se crean parametros en
+					la misma se puede ver en el objeto global
+
+					miFuncion: ƒ miFuncion()
+					arguments: null
+					caller: null
+					length: 0
+					name: "miFuncion"
+					prototype: {constructor: ƒ}
+					__proto__: ƒ ()
+   function miFuncion(){
+
+    }
+    var a=miFuncion();
+    console.log(a);
+	salida
+	undefined
+toda funcion retorna algo,aqui se le asigna el valor de la funcion a la variable a
+
+
+
+//PARAMETROS DE LAS FUNCIONES
+las funciones pueden recibir tipos primitivos,objetos y funciones
+si al momoento de llamar a la funcion esta no tiene todos los parametros ho hay problema el programa sigue corriendo con undefined en el espacio sin definir
+//CLOSURES funciones dentro de otras
+	mandando tipos primitivos
+	function holamundo(nombre){
+	function imprimir(nombre,apellido){
+		apellido=apellido||'xxx';
+		console.log(nombre+" "apellido);
+	}
+	imprimir("juan");
+
+			mandando objetos
+			function imprimir2(persona){
+				console.log(persona);
+			}
+			imprimir2({
+				nombre:"juan",
+				apellido:"nuker"
+			});
+
+					madando objetos
+					function imprimir2(persona){
+						console.log(persona.nombre+' '+persona.apellido);
+					}
+
+					imprimir2({
+						nombre:"juan",
+						apellido:"nuker"
+					});
+							mandando funciones
+							function imprimirx(fn){
+								fn();
+							}
+
+							imprimirx( 
+							 	function(){
+							 		console.log('Funcion Anonima');
+							 	}
+								);
+					mandando funciones normales
+					function imprimir3(fn){
+						fn();
+					}
+					var miFuncion=function(){
+					console.log("funcion normal!!");
+					}
+
+					imprimir3(miFuncion);
+								
+//FUNCIONES CON VALOR DE RETORNO
+las fuciones en js pueden retornar un PRIMITIVO un OBJETO,FUNCIONES,UNDEFINED Y NULL
+	   function obtenerNombre(){
+		return 'Juana';
+	   }
+	   var nombre=obtenerNombre();
+	   console.log(nombre);
+               				la funcion con valor de retorno booleano
+				function esMayor05(){
+					if(obtenerAleatorio()>0.5){
+						return true;
+					}else{
+						return false;
+					}
+				}
+				console.log(esMayor05());
+
+			funcion que retorna un objeto
+			function crearPersona(nombre,apellido){
+			return{
+				nombre:nombre,
+				apellido:apellido
+			}
+			}
+
+			var persona=crearPersona("Maria","Perez");
+			console.log(persona);
+
+						 funcion que retorna un funcion
+						function creaFuncion(){
+							return function(){
+								console.log("ME crearon !!");
+							}
+						}
+						var nuevaFuncion =creaFuncion();
+						nuevaFuncion();
+		 funcion que retorna dos funciones anidadas
+		function creaFuncion(){
+			return function(nombre){
+				console.log("ME creo !!" + nombre);
+	
+				return function(){
+					console.log("Segunda funcion XD");
+				}
+			}
+		}
+		var nuevaFuncion =creaFuncion();
+		var segundaFuncion=nuevaFuncion(persona.nombre);
+		segundaFuncion();
+
+//FUNCIONES CON PARAMETROS
+			    function imprimir(nombre){
+				console.log(nombre);
+			    }
+			    imprimir("Piero");
+						salida
+						Piero
+ 			    existen otro tipos de variables las anonimas y las explicitas,
+			    las anonimas son aquellas que se crean al momento de llamar a la funcion
+			    en este caso Piero es anonima
+			    una variable explicita es cuando se define
+			    var a="Andrea";, a  es explicita
+    function imprimir(nombre, apellido){
+        console.log(nombre+' '+apellido);
+    }
+    imprimir("Piero");
+		salida
+		Piero undefined
+		aca se reciben 2 parametros nombre y apellido al llamar a la funcion JS 
+		reserva dos espacios de memoria uno lo llena Piero,y el otro se queda
+                undefined pero la funcion no revienta
+					    function imprimir(nombre, apellido){
+						apellido=apellido||"Apellido por defecto";
+						console.log(nombre+' '+apellido);
+					    }
+					    imprimir("Piero");
+								salida
+								Piero Apellido pordefecto
+					   *una forma de hacer condicional apellido sera apellido 
+                                           que se le pase por parametro,si no se le pase todo se   					           acomodara"Apellido por defecto" en su lugar
+    function imprimir(nombre){
+        console.log(nombre);
+    }
+    imprimir({ nombre:'Wade',apellido:'Wilson'})
+			salida
+			{nombre: "Wade", apellido: "Wilson"}
+                                     en este caso al momento de llamar
+                                     a la funcion se le pasa un 'objeto' 
+                                     anonimo el cual se imprime luego
+
+    function imprimir(persona){
+        console.log(persona.nombre+' '+persona.apellido+' '+persona.algo);
+    }
+    imprimir({ nombre:'Wade',apellido:'Wilson'})
+					salida
+					Wade Wilson undefined
+				al momento de imprimir especificamos que paramentros 
+				del objeto deben imprimirse si no esta el parametro la funcion ya reservó espacio 					de memoria para tres parametros y si no lo encuentra pone undefined
+
+
+    
+//FUNCIONES DE PRIMERA CLASE
+aqui se le puede agregar la propiedad nombre a la funcion a
+function a(){
+	conslole.log("Funcion a");
+}
+a();
+a.nombre="Maria";
+
+//METODOS Y EL OBJETO THIS
+la referencia this sirve para referenciar lo que esta adentro de un objeto
+		var persona={
+			nombre:"Maria",
+			apellido:"Habich",
+			imprimeNombre:function(){
+				console.log(this.nombre+" "+this.apellido);
+			}
+		};
+		persona.nombre="Andres";
+		persona.imprimeNombre();
+
+
+
+//PALABRA RESERVADA NEW
+reserva un espacio de memoria de acuerdo a la variable que va responder
+		function Persona(){
+
+		}
+		var juan=new Persona();
+		console.log(juan); retorna un objeto vacio
+
+				 	function Persona(){
+					this.nombre="juan";
+					this.apellido="nuker";
+					this.edad=30;
+					}
+
+					var juan=new Persona();
+					console.log(juan); retorna un objeto con propiedades
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//AJAX ASINCRONO* JAVASCRIPT AND XML AUNQEU ESTE ULTIMO YANO SE USA
+sirve para cambiar datos en una pagina sin necesidad de recargar la misma
+
+//JASON JAVASCRIPT OBJET NOTATION
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
