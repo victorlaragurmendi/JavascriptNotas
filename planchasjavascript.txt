@@ -10,7 +10,7 @@ se separan por comas
 		};
 
 //PASO POR VALOR Y REFERENCIA
-paso por valor ocurre siempre en las variables primitivas 
+paso por valor (solo una copia) ocurre siempre en las variables primitivas 
 ambos tienen un espacio de memoria diferentes a y b si le cambio
 el valor a a e imprimo los dos denuevo b se queda con el valor anterior
 	var a=10;
